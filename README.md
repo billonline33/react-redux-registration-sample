@@ -12,16 +12,16 @@ For security reason, the password field has complicated validation rules.
 
 These rules are dynamiclly updated as the user types.
 
-When the user type the first capital letter, it shows what other rules haven't been met yet
+### When the user type the first capital letter, it shows what other rules haven't been met yet
 
 ![](screenshots/password-screenshot1.png)
 
-As the user types more, the warning messages are updated
+### As the user types more, the warning messages are updated
 ![](screenshots/password-screenshot2.png)
 
 ![](screenshots/password-screenshot3.png)
 
 ![](screenshots/password-screenshot4.png)
 
-When all rules are met, no more warning messages.
+### When all rules are met, no more warning messages.
 ![](screenshots/password-screenshot5.png)
