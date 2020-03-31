@@ -3,6 +3,8 @@
 
 ## See the application in action
 
+[![stackblitz](screenshots//stackblitz-screenshot-large.png)](https://stackblitz.com/github/billonline33/react-redux-registration-sample)
+
 See on StackBlitz at https://stackblitz.com/github/billonline33/react-redux-registration-sample 
 
 This sample application is build with React 16.12 and redux-form 7.4.2
