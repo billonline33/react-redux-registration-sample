@@ -1,0 +1,41 @@
+$base-font-size: 13px;
+$base-font-family: Tahoma;
+
+$color-links: red;
+$color-body: black;
+$color-header: green;
+$color-brand-red: #981e32;
+$color-active: #0062cc;
+$color-default: #343a40;
+$color-success: #28a745;
+$color-warning: #ffb22b;
+$color-error: #dc3545;
+
+%icon {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  padding-right: .5rem;
+  color: $color-brand-red;
+}
+@mixin transition($transition...) {
+   @if $enable-transitions{
+    @if length($transition) == 0 {
+      transition: $transition-base;
+    }
+    @else {
+      transition: $transition;
+    }
+  }
+}
+
+// @font-face {
+//   font-family: HelveticaNeue;
+//   src: url('../assets/fonts/Helvetica-Neue-LT-Std-45-Light_22520.ttf');
+// }

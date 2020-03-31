@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ycni-deployment-$FEATURE_NAME
+  labels: &labels  # YAML anchor, helps with repetition
+    name: "ycni-app-$FEATURE_NAME"
+    branch: $FEATURE_NAME
+    environment: "$ENV"
+    application: "ycni"
+spec:
+  selector:
+    matchLabels:
+      name: ycni-app-$FEATURE_NAME
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  progressDeadlineSeconds: 300  # 5 minute timeout
+  template: # create pods using pod definition in this template
+    metadata:
+      labels: *labels
+    spec:
+      containers:
+      - name: ycni-app-$FEATURE_NAME
+        image: nexus.corp.dmz:8083/ycni/fronendweb:$BUILD_VERSION
+        ports:
+        - containerPort: 80
+          name: server
+      imagePullSecrets:
+      - name: regcred
+      
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ycni-service-$FEATURE_NAME
+  labels:  # can't use anchors across YAML documents unfortunately
+    name: "ycni"
+    branch: $FEATURE_NAME
+    environment: "$ENV"
+    application: "ycni"
+    tier: "web"
+spec:
+  selector:
+    name: ycni-app-$FEATURE_NAME
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ycni-ingress-$FEATURE_NAME
+  labels:  # can't use anchors across YAML documents unfortunately
+    name: "ycni"
+    branch: $FEATURE_NAME
+    environment: "$ENV"
+    application: "ycni"
+    tier: "web"
+spec:
+  rules:
+    - host: "$APP_DNS"
+      http:
+        paths:
+          - backend:
+              serviceName: ycni-service-$FEATURE_NAME
+              servicePort: 80
